@@ -8,10 +8,10 @@ var definePlugin = new webpack.DefinePlugin({
 });
 
 // For having a separate stylesheet to avoid FOUC.
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  entry: './main.js',
+  entry: './src/index.js',
 
   output: {
     path: path.join(__dirname, 'build'),
@@ -21,15 +21,9 @@ module.exports = {
 
   module: {
     loaders: [
-      // React.js
-      {
-        test: /\.jsx$/,
-        loader: 'jsx-loader?harmony',
-        exclude: /node_modules/
-      },
       // ES6 support
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'babel-loader'
       },
@@ -38,11 +32,15 @@ module.exports = {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract('style',
             'css!autoprefixer!sass?outputStyle=expanded&"' + "includePaths[]=" + path.resolve(__dirname, "./node_modules"))
-      },
-      {
-
       }
     ]
+  },
+
+  externals: {
+    'd3': 'd3',
+    'moment': 'moment',
+    'firebase': 'Firebase',
+    'randomColor': 'randomColor'
   },
 
   resolve: {
@@ -52,8 +50,7 @@ module.exports = {
 
   plugins: [
     definePlugin,
-    new webpack.optimize.CommonsChunkPlugin('common.js'),
-    new ExtractTextPlugin("default.css"),
+    new ExtractTextPlugin('[name].css')
   ],
 
   debug: true

@@ -4,24 +4,27 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "watch": "webpack --colors -d --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "autoprefixer-loader": "^1.1.0",
-    "babel-core": "^4.4.3",
-    "babel-loader": "^4.0.0",
+    "autoprefixer-loader": "^1.2.0",
+    "babel-core": "^4.7.16",
+    "babel-loader": "^4.3.0",
     "css-loader": "^0.9.1",
     "extract-text-webpack-plugin": "^0.3.8",
     "file-loader": "^0.8.1",
     "jsx-loader": "^0.12.2",
-    "sass-loader": "^0.4.0-beta.1",
+    "node-libs-browser": "^0.5.2",
+    "sass-loader": "^0.4.2",
     "style-loader": "^0.8.3",
-    "webpack": "^1.5.3"
+    "webpack": "^1.9.12"
   },
   "dependencies": {
-    "lodash": "^3.3.0",
-    "react": "^0.12.2"
+    "lodash": "^3.9.3",
+    "moment": "^2.10.3",
+    "react": "^0.13.3"
   }
 }

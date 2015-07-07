@@ -1,0 +1,86 @@
+/**
+ * From 
+ * https://github.com/codrops/CreativeButtons/blob/master/css/component.css
+ */
+
+.btn {
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: none;
+  cursor: pointer;
+  padding: 25px 80px;
+  display: inline-block;
+  margin: 15px 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  outline: none;
+  position: relative;
+  transition: all 0.3s;
+
+  &:after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    transition: all 0.3s;
+  }
+}
+
+.color-dot {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  left: 8%;
+  top: 35%;
+}
+
+.btn-success:after {
+  content: "Good Job!";
+  animation: moveUp 0.5s;
+  z-index: 1;
+  color: #fff;
+  left: 8%;
+}
+
+.btn-success {
+  color: transparent;
+  span {
+    visibility: hidden;
+  }
+}
+
+.btn-7h:before {
+  position: absolute;
+  left: 0;
+  width: 40%;
+  font-size: 160%;
+  line-height: 0.8;
+  color: #0a833d;
+}
+
+.btn-7 {
+  background: #79D3C4;
+  color: #FFF;
+  border-radius: 7px;
+  box-shadow: 0 4px #70C1B3;
+  padding: 12px 25px 12px 45px;
+}
+
+@keyframes moveUp {
+  0% {
+    transform: translateY(50%);
+    opacity: 0;
+  }
+  100% { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {transform: translateX(0);}
+  10%, 30%, 50%, 70%, 90% {transform: translateX(-10px);}
+  20%, 40%, 60%, 80% {transform: translateX(10px);}
+}
