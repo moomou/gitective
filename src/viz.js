@@ -2,17 +2,21 @@ import React from 'react';
 import _und from 'lodash';
 import d3 from 'd3';
 import moment from 'moment';
-import randomColor from 'randomColor';
 
 import Tip from './comp/Tip';
 
 import '../sass/style.scss';
+
+const TODAY = new Date();
+const BROWSER_WIDTH = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+const MOBILE_WIDTH = BROWSER_WIDTH < 1024;
 
 const width = 960;
 const height = 200;
 const cellSize = 17;
 const weekdays = moment.weekdays();
 const heatMapClass = d3.range(11).map((d) => 'q' + d + '-11' );
+const currentMonthClass = (d) => d.getMonth() === TODAY.getMonth() ? 'current-month' : '';
 
 function grade(work) {
   if (work >= 10) return 'S';
@@ -53,7 +57,9 @@ let svg = d3.select('#viz').selectAll('svg')
     .attr('height', height)
     .attr('class', 'RdYlGn')
   .append('g')
-    .attr('transform', 'translate(' + ((width - cellSize * 53) / 2) + ',' + (height - cellSize * 8 - 1) + ')');
+    .attr('transform', () => {
+      return 'translate(' + ((width - cellSize * 53) / 2) + ',' + (height - cellSize * 8 - 1) + ')';
+    });
 
 svg.selectAll('text')
     .data(d3.range(7))
@@ -69,7 +75,7 @@ let dayGroup = svg.selectAll('.day')
 
 let rect = dayGroup
   .append('rect')
-    .attr('class', 'day')
+    .attr('class', (d) => 'day ' + currentMonthClass(d))
     .attr('width', cellSize)
     .attr('height', cellSize)
     .attr('x', (d) => d3.time.weekOfYear(d) * cellSize)
@@ -99,6 +105,7 @@ svg.selectAll('.month-label')
     .attr('y', -5)
     .text((d) => d3.time.format('%b')(d));
 
+// Heat map guide
 svg.selectAll('.viz-guide')
   .append('g')
   .data(d3.range(11))
@@ -141,7 +148,7 @@ export function visualize(inputData, tracks) {
     .on('mouseout', tip.hide);
 
   rect.filter((d) => d in data)
-    .attr('class', (d) => 'day ' + color(data[d]))
+    .attr('class', (d) => 'day ' + color(data[d]) + ' ' + currentMonthClass(new Date(d)))
       .select('title')
     .text((d) => d + ': ' + percent(data[d]));
 }
