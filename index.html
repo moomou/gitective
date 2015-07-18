@@ -2,33 +2,66 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Gitrack</title>
+  <title>GITECTIVE</title>
   <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="./build/main.css">
 </head>
 <body>
-  <h1 class="title">Gitrack</h1>
+  <header>
+    <div class="top">
+      <div id="settings-container" class="top-item"></div>
+      <h1 class="title adapt-title top-item">Gitective</h1>
+      <div id="undo-btn-container" class="top-item"></div>
+    </div>
+    <p class="adapt-txt txt-center">Record your daily activities and grade yourself.</p>
+  </header>
 
-  <section class="control" id="viz"></section>
+  <div id="faq" class="faq hidden">
+    <h3>What is it?</h3>
+    <p>
+      This is a simple personal task tracker that allows you to create a set of tasks to track and gives you a grade based on what you record each day.
+      <br/><br/>
+      See an <a href="/#user:sample:8EF59115-19E1-5AAA-B07D-3641CD73E0C9">example</a>
+    </p>
+    <hr>
+    <h3>How do I use it?</h3>
+    <p>
+      Getting started is easy - simply choose a username and click on the CREATE button below.
+      <br/><br/>
+      <p><em>Important - </em> this will create a unique URL for you and this URL is the only way for you log back to the same user. Anyone with the URL can see your data so only share it people you trust. Bookmark it!</p>
+    </p>
+    <hr>
+  </div>
 
-  <section id="add-user" class="control hidden"> </section>
+  <div class="content">
+    <div id="scroller" class="scroll">
+      <section style="width: 960px;" class="control hidden" id="viz"></section>
+    </div>
 
-  <section id="track" class="control track-buttons hidden">
-    <button>Culture</button>
-    <button>Machine Learning</button>
-    <button>Reading</button>
-    <button>Startup</button>
-  </section>
+    <br/>
 
-  <section id="add-track" class="control hidden"> </section>
+    <section id="add-user" class="control hidden">
+      <div id="add-user-container"></div>
+    </section>
+
+    <section id="track" class="control track-buttons hidden"> </section>
+
+    <section id="add-track" class="control hidden"> </section>
+  </div>
+
+  <footer id="credit">
+    <div class="links">
+    </div>
+    <p class="txt-center"><img width="42" style="vertical-align: middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAABACAYAAADS1n9/AAACzklEQVR4Xu2cv2sUURSFvxT+AxYpBTvRIvijVewFC4UUtiJY2FpY2AVLwUoFS7GyEME+hHQiaKGVjViqf4GFMiEp9rIs8969d2bfvrPl5N0z735z9sxNZjdb6NU1ga2uu1fzyACdm0AGkAE2gsA2cMZ08gP4FdRdtn7QNstlNiUB7gPPTfv3gFflSJZWZOsHbbNcRgYYx0wGGMdptlXZFyhbfzZwSoBx6GWAcZwmWTUMZLfMmU4BF8yx18Bh0I6uAXeM1lfgrzn2FvgddM5JZFpMgCvAR0PnJTC8S6d8DQPmXXPCi8DnKTfhPZcMUE9QBqhn56pUArjwLRYrAephKgHq2bkqLwHPjMI+8NilWl78BLhqyh4AX8ql5qtQAtSzVwLUs3NVagZw4dMMEIVPCRBFslBHCVAIbNXyFmeAy8Ab09R74GEglzFST4EbZuGuhsAx6HxrlAA+fgvVLSaADCAD6FlAlAeUAPUk9VtAPbuiyn9m9SdguA2s42t4ErhjNrbWb7K13twxSBkg0eoyQCxcJUAszyM1JUAC1BPJFhLgm+n/O3AzkYlH+gNw1gic9whm17ZgACVAogtkgFi4mgFieWoGSODZ3J+CdQtIdEELt4AXpv8/wE9zbBgUDxI5LZO+DpwzPxi+oHraHJv64+pFGFowgG1ID4OKLvHqxTJAPUw9C6hn56pUArjwLRYrAephKgHq2bkq9b0AFz4lQBQ+JUAUyUIdzQCFwFYt1wxQD1MJUM/OVakEcOFrfwbQ9wI6N4ASQAbQx8KjPKAhsJ6khsB6dq5K3QJc+NofApe1n/1//LL1Ay9pmVSLtwAZoOwar1wtA4yDqQQYx2m2VdkXKFt/NnCbkgC3gUeG4h7wLohstn7QNstlNsUA5Z2r4oiADNC5EWQAGaBzAp23rwSQATon0Hn7SgAZoHMCnbevBJABOifQeftKgM4N8B/p7r5BfIYP1QAAAABJRU5ErkJggg==" alt="Crafted">by <a target="_blank" href="https://github.com/moo-mou">moo-mou</a></p>
+  </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.3.0/randomColor.min.js"></script>
-  <script src="https://cdn.firebase.com/js/client/2.2.7/firebase.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chance/0.5.6/chance.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.6.3/d3-tip.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+  <script src="https://cdn.firebase.com/js/client/2.2.7/firebase.js"></script>
   <script src="./build/main.js"></script>
 </body>
 </html>

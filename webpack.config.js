@@ -31,15 +31,16 @@ module.exports = {
       {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract('style',
-            'css!autoprefixer!sass?outputStyle=expanded&"' + "includePaths[]=" + path.resolve(__dirname, "./node_modules"))
+            'css!autoprefixer!sass?outputStyle=expanded&includePaths[]=' + path.resolve(__dirname, './node_modules'))
       }
     ]
   },
 
   externals: {
+    'chance': 'chance',
     'd3': 'd3',
-    'moment': 'moment',
     'firebase': 'Firebase',
+    'moment': 'moment',
     'randomColor': 'randomColor'
   },
 

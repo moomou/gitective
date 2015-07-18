@@ -1,18 +1,26 @@
 import React from 'react';
+import chance from 'chance';
+
 import * as data from '../data';
 
 const NewUserButton = React.createClass({
-  propTypes: {
+  style: {
+    container: {
+      margin: '15px 10px 20px 10px'
+    }
   },
   createNewUser() {
     let username = this.refs.username.getDOMNode().value;
-    data.createUser(username);
+    let guid = chance.guid();
+    data.createUser(username + ':' + guid);
   },
   render() {
     return (
-      <div>
-        <input ref="username" type="text" placeholder="New User"/>
-        <button onClick={this.createNewUser}>New User</button>
+      <div style={this.style.container}>
+        <div className="inputAddOn" style={this.style.container}>
+          <input className="inputAddOn-field" ref="username" type="text" placeholder="Enter Username"/>
+          <button className="btn btn-black inputAddOn-btn" onClick={this.createNewUser}>Create</button>
+        </div>
       </div>
     );
   }

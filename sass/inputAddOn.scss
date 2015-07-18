@@ -1,6 +1,6 @@
-// from 
-// https://github.com/philipwalton/solved-by-flexbox/blob/master/demos/input-add-ons.md
-
+/**
+ * https://github.com/philipwalton/solved-by-flexbox/blob/master/demos/input-add-ons.md
+ */
 .inputAddOn {
   display: flex;
 }
@@ -14,10 +14,32 @@
 }
 
 .inputAddOn-btn {
-  background-color: #70c1b3;
   border-radius: 0;
-  margin: 0;
-  padding: 15px;
   box-shadow: none;
+  margin: 0;
+  min-width: 90px;
+  padding: 15px;
   top: 0;
+}
+
+.mini .inputAddOn-btn {
+  font-size: 12px;
+}
+
+.mini .inputAddOn-field {
+  font-size: 25px;
+}
+
+@media all and (max-width: 640px) and (min-width: 320px) {
+  .inputAddOn {
+    font-size: 12px;
+  }
+
+  .inputAddOn-btn {
+    padding: 10px;
+  }
+
+  .inputAddOn-field {
+    font-size: 17px;
+  }
 }

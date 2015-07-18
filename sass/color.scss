@@ -1,8 +1,8 @@
-$color1: #247ba0; //rgba(36, 123, 160, 100)
-$color2: #70c1b3; //rgba(112, 193, 179, 100)
-$color3: #b2dbbf; //rgba(178, 219, 191, 100)
-$color4: #f3ffbd; //rgba(243, 255, 189, 100)
-$color5: #ff1654; //rgba(255, 22, 84, 100)
+$color1: #247ba0;
+$color2: #70c1b3;
+$color3: #b2dbbf;
+$color4: #f3ffbd;
+$color5: #ff1654;
 
 .rainbow {
   background-image: -webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
@@ -24,8 +24,36 @@ $color5: #ff1654; //rgba(255, 22, 84, 100)
 .RdYlGn .q9-11{fill:rgb(26,152,80)}
 .RdYlGn .q10-11{fill:rgb(0,104,55)}
 
-.g-S { fill: $color5; }
-.g-A { fill: $color4; }
-.g-B { fill: $color3; }
-.g-C { fill: $color2; }
-.g-F { fill: $color1; }
+.g-S { fill: $color5; background: $color5; }
+.g-A { fill: $color4; background: $color4; }
+.g-B { fill: $color3; background: $color3; }
+.g-C { fill: $color2; background: $color2; }
+.g-F { fill: $color1; background: $color1; }
+
+.txt-black {
+  color: black;
+}
+
+.txt-white {
+  color: white;
+}
+
+.btn-black {
+  background: black;
+}
+
+.btn-green {
+  background: green;
+}
+
+.btn-orange {
+  background: #ff9f1c;
+}
+
+.btn-red {
+  background: red;
+}
+
+.btn-blue {
+  background: #000080
+}

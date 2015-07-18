@@ -9,3 +9,11 @@ export function promisify(fn) {
     });
   };
 }
+
+export function retryUntil(predicate, cb) {
+  let intervalRef = setInterval(() => {
+    if (!predicate()) return;
+    clearInterval(intervalRef);
+    cb();
+  }, 250);
+}

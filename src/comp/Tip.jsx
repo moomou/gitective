@@ -7,7 +7,9 @@ const Tip = React.createClass({
       margin: 0,
       padding: 0
     },
-    li: {
+    date: {
+      marginBottom: 5,
+      textAlign: 'center'
     },
     name: {
       margin: 10
@@ -28,6 +30,7 @@ const Tip = React.createClass({
     }
   },
   propTypes: {
+    date: React.PropTypes.string,
     details: React.PropTypes.object,
     tracks: React.PropTypes.arrayOf(React.PropTypes.object)
   },
@@ -35,17 +38,19 @@ const Tip = React.createClass({
     let li = Object.keys(this.props.details).map(trackName => {
       let value = this.props.details[trackName];
       let color = this.props.tracks[trackName].color;
+      if (!value) return null;
       return (
-        <li style={this.style.li}>
+        <li>
           <span style={this.style.square(color)}></span>
           <span style={this.style.name}>{trackName}</span>
           <span style={this.style.value}>{value}</span>
         </li>
       );
-    });
+    }).filter(i => i);
 
     return (
       <ul style={this.style.ul}>
+        <li style={this.style.date}>{this.props.date}</li>
         {li}
       </ul>
     );

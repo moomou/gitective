@@ -10,7 +10,7 @@ const TrackButton = React.createClass({
     let btn = this.refs.btn.getDOMNode();
     btn.classList.add('btn-success');
     btn.setAttribute('disabled', true);
-    this.props.onClick(this.props.name);
+    this.props.onClick(this.props.name, this.props.color);
     setTimeout(() => {
       btn.classList.remove('btn-success');
       btn.removeAttribute('disabled');
@@ -20,7 +20,7 @@ const TrackButton = React.createClass({
     return (
       <button
         ref="btn"
-        className="btn btn-7 btn-7h"
+        className="btn btn-7 btn-7h adapt-txt"
         data-color={this.props.color}
         onClick={this._onClick}>
           <span className="color-dot" style={{backgroundColor: this.props.color}}></span>

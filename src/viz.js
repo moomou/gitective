@@ -12,17 +12,27 @@ const BROWSER_WIDTH = window.innerWidth || document.documentElement.clientWidth 
 const MOBILE_WIDTH = BROWSER_WIDTH < 1024;
 
 const width = 960;
-const height = 200;
+const height = 210;
 const cellSize = 17;
 const weekdays = moment.weekdays();
 const heatMapClass = d3.range(11).map((d) => 'q' + d + '-11' );
 const currentMonthClass = (d) => d.getMonth() === TODAY.getMonth() ? 'current-month' : '';
 
+const monthBlockSize = width / 12;
+const currentMonthOffset = TODAY.getMonth() * monthBlockSize - 100;
+
+const percent = d3.format('.1%');
+const format = d3.time.format('%Y-%m-%d');
+
+let gradeLevel = null;
+
 function grade(work) {
-  if (work >= 10) return 'S';
-  if (work >= 8) return 'A';
-  if (work >= 7) return 'B';
-  if (work >= 6) return 'C';
+  // not loaded yet
+  if (!gradeLevel) return '';
+  if (work >= gradeLevel.s) return 'S';
+  if (work >= gradeLevel.a) return 'A';
+  if (work >= gradeLevel.b) return 'B';
+  if (work >= gradeLevel.c) return 'C';
   return 'F';
 }
 
@@ -47,18 +57,15 @@ function monthLabelOffset(t0) {
   return (w0 * cellSize) + cellSize * ((prevMonth.week() === w0 + 1) ? 1 : 0);
 }
 
-let percent = d3.format('.1%');
-let format = d3.time.format('%Y-%m-%d');
-
 let svg = d3.select('#viz').selectAll('svg')
-    .data([2015])
+    .data([TODAY.getFullYear()])
   .enter().append('svg')
     .attr('width', width)
     .attr('height', height)
     .attr('class', 'RdYlGn')
   .append('g')
     .attr('transform', () => {
-      return 'translate(' + ((width - cellSize * 53) / 2) + ',' + (height - cellSize * 8 - 1) + ')';
+      return 'translate(' + ((width - cellSize * 53) / 2) + ',' + (height - cellSize * 9 - 1) + ')';
     });
 
 svg.selectAll('text')
@@ -112,11 +119,23 @@ svg.selectAll('.viz-guide')
   .enter().append('rect')
     .attr('class', (d) => heatMapClass[d])
     .attr('width', cellSize)
-    .attr('height', cellSize)
+    .attr('height', cellSize / 2)
     .attr('x', (d) => d * (cellSize + 1) + 705)
     .attr('y', 130);
 
+// Year guide
+svg.append('text')
+  .attr('y', 140)
+  .text(TODAY.getFullYear());
+
 d3.select(self.frameElement).style('height', '2910px');
+
+export function updateGrading(newGrading) {
+  gradeLevel = Object.keys(newGrading).reduce((acc, k) => {
+    acc[k] = parseInt(newGrading[k], 10);
+    return acc;
+  }, {});
+}
 
 export function visualize(inputData, tracks) {
   if (!inputData) return;
@@ -132,16 +151,16 @@ export function visualize(inputData, tracks) {
     .attr('class', 'd3-tip')
     .offset([-10, 0])
     .html((d) => {
-      return React.renderToStaticMarkup(<Tip details={inputData[d]} tracks={tracks}/>);
+      return React.renderToStaticMarkup(<Tip date={d} details={inputData[d]} tracks={tracks}/>);
     });
 
   let color = d3.scale.quantize()
-    .domain([0, 10])
+    .domain([0, gradeLevel && gradeLevel.s || 10])
     .range(heatMapClass);
 
   svg.call(tip);
 
-  rectTxt.filter((d) => d in data) // && d !== format(new Date()))
+  rectTxt.filter((d) => d in data)
     .attr('class', (d) => 'g-' + grade(data[d]))
     .text((d) => grade(data[d]))
     .on('mouseover', tip.show)
@@ -151,4 +170,8 @@ export function visualize(inputData, tracks) {
     .attr('class', (d) => 'day ' + color(data[d]) + ' ' + currentMonthClass(new Date(d)))
       .select('title')
     .text((d) => d + ': ' + percent(data[d]));
+}
+
+export function getMonthScrollOffset() {
+  return currentMonthOffset;
 }

@@ -16,9 +16,8 @@ export default React.createClass({
       tracks: t || []
     };
   },
-  _onClick(trackName) {
-    let date = moment().format('YYYY-MM-DD');
-    data.addEntries(this.props.username, date, trackName);
+  _onClick(trackName, color) {
+    data.addEntries(this.props.username, trackName, color);
   },
   render() {
     let buttons = this.state.tracks.map(t => {
@@ -26,14 +25,13 @@ export default React.createClass({
     });
 
     return (
-      <div>
+      <div className="control">
         {buttons}
       </div>
     );
   },
-  updateTracks(tracks) {
-    this.setState({
-      tracks: _und.values(tracks)
-    });
+  updateTracks(input) {
+    let tracks = _und.values(input);
+    this.setState({ tracks });
   }
 });

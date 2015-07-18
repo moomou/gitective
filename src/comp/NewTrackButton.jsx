@@ -19,8 +19,8 @@ const NewTrackButton = React.createClass({
   render() {
     return (
       <div className="inputAddOn" style={this.style.container}>
-        <input className="inputAddOn-field" ref="trackName" type="text" placeholder="Track Name"/>
-        <button ref="btn" className="btn btn-7 btn-7h inputAddOn-btn" onClick={this.createNewTrack}>Add New Track</button>
+        <input className="inputAddOn-field" ref="trackName" type="text" placeholder="Enter Task Name"/>
+        <button ref="btn" className="btn btn-orange inputAddOn-btn" onClick={this.createNewTrack}>New Task</button>
       </div>
     );
   }

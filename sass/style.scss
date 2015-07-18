@@ -1,77 +1,96 @@
 @import './btn';
 @import './color';
 @import './inputAddOn';
+@import './form';
+@import './viz';
+
+html {
+  position: relative;
+  min-height: 100%;
+}
 
 body {
+  font-family: ‘Metrophobic’, Arial, serif;
+  font-weight: 400;
   margin-top: 60px;
+  min-height: 65vh;
   shape-rendering: crispEdges;
-  font-family: ‘Metrophobic’, Arial, serif; font-weight: 400;
+}
+
+header {
+  position: relative;
+
+  .top {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: wrap
+  }
+
+  .top-item {
+    align-self: center;
+    flex: 1;
+  }
+}
+
+footer {
+  bottom: 0;
+  font-size: 12px;
+  height: 100px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}
+
+.faq {
+  margin: 25px auto;
+  padding: 5px;
+  max-width: 700px;
+}
+
+.links {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+
+  a {
+    padding: 0 5px;
+  }
+}
+
+.content {
+  margin-bottom: 100px;
+}
+
+.txt-center {
+  display: block;
+  text-align: center;
 }
 
 .hidden {
   display: none !important;
 }
 
-.day {
-  fill: whitesmoke;
-  stroke: #ccc;
-  stroke-width: 1px;
-}
-
-.month {
-  fill: none;
-  stroke: #000;
-  stroke-width: 1px;
-}
-
-.title {
-  font-weight: 300;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-.control {
-  width: 100%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.track-buttons {
-  max-width: 70%;
-  margin-top: 35px;
-
-  button {
-    margin: 10px;
+.adapt-txt {
+  @media all and (max-width: 640px) and (min-width: 320px) {
+    font-size: 13px;
   }
 }
 
-.d3-tip {
-  line-height: 1;
-  font-weight: bold;
-  padding: 12px;
-  background: rgba(0, 0, 0, 0.8);
-  color: #fff;
-  border-radius: 2px;
+.adapt-title {
+  @media all and (max-width: 640px) and (min-width: 320px) {
+    font-size: 15px;
+  }
 }
 
-/* Creates a small triangle extender for the tooltip */
-.d3-tip:after {
-  box-sizing: border-box;
-  display: inline;
-  font-size: 10px;
-  width: 100%;
-  line-height: 1;
-  color: rgba(0, 0, 0, 0.8);
-  content: "\25BC";
-  position: absolute;
-  text-align: center;
+.scroll {
+  overflow: scroll;
 }
 
-/* Style northward tooltips differently */
-.d3-tip.n:after {
-  margin: -1px 0 0 0;
-  top: 100%;
-  left: 0;
+.control {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  margin: 0 auto;
 }
