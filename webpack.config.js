@@ -1,6 +1,8 @@
 var webpack = require('webpack');
 var path = require('path');
 
+var buildOutput = process.env.NODE_ENV === 'production' ? 'dist' : 'build';
+
 // definePlugin takes raw strings and inserts them, so you can put strings of JS if you want.
 var definePlugin = new webpack.DefinePlugin({
   __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true')),
@@ -14,8 +16,8 @@ module.exports = {
   entry: './src/index.js',
 
   output: {
-    path: path.join(__dirname, 'build'),
-    publicPath: '/build/',
+    path: path.join(__dirname, buildOutput),
+    publicPath: '/' + buildOutput + '/',
     filename: '[name].js'
   },
 

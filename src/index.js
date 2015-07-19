@@ -19,21 +19,37 @@ const trackControl = document.getElementById('track');
 const undoBtnContainer = document.getElementById('undo-btn-container');
 const vizContainer = document.getElementById('viz');
 
+const signedInControls = [
+  newTrackControl,
+  scrollContainer,
+  settingsContainer,
+  trackControl,
+  undoBtnContainer,
+  vizContainer
+];
+
+const anonymousControl = [
+  newUserControl,
+  faqContainer
+];
+
+function setHiddenState(doms, hiddenState) {
+  doms.forEach(d => {
+    if (hiddenState) {
+      d.classList.add('hidden');
+    } else {
+      d.classList.remove('hidden');
+    }
+  });
+}
+
 function locationChange() {
   if (!location.hash) {
-    trackControl.classList.add('hidden');
-    vizContainer.classList.add('hidden');
-    newTrackControl.classList.add('hidden');
-
-    faqContainer.classList.remove('hidden');
-    newUserControl.classList.remove('hidden');
+    setHiddenState(signedInControls, true /* hiddenState */);
+    setHiddenState(anonymousControl, false /* hiddenState */);
   } else if (location.hash.startsWith(data.USER_PREFIX)) {
-    faqContainer.classList.add('hidden');
-    newUserControl.classList.add('hidden');
-
-    vizContainer.classList.remove('hidden');
-    trackControl.classList.remove('hidden');
-    newTrackControl.classList.remove('hidden');
+    setHiddenState(signedInControls, false /* hiddenState */);
+    setHiddenState(anonymousControl, true /* hiddenState */);
 
     scrollContainer.scrollLeft = getMonthScrollOffset();
 

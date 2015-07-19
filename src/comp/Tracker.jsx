@@ -1,5 +1,4 @@
 import React from 'react';
-import moment from 'moment';
 import _und from 'lodash';
 
 import * as data from '../data';

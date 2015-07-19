@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "watch": "webpack --colors -d --watch",
+    "prod": "rm ./dist/* && NODE_ENV=production webpack --colors -p",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
