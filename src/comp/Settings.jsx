@@ -15,6 +15,7 @@ export default React.createClass({
       right: 0,
       top: 0,
       width: '100%',
+      maxWidth: 420,
       zIndex: 999
     },
     actionBtn: {
