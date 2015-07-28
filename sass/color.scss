@@ -1,8 +1,10 @@
-$color1: #247ba0;
-$color2: #70c1b3;
-$color3: #b2dbbf;
-$color4: #f3ffbd;
-$color5: #ff1654;
+/* Coolors Exported Palette - coolors.co/011627-fdfffc-2ec4b6-e71d36-ff9f1c */
+
+$color1: #011627; //rgba(1, 22, 39, 100)
+$color2: #fdfffc; //rgba(253, 255, 252, 100)
+$color3: #2ec4b6; //rgba(46, 196, 182, 100)
+$color4: #e71d36; //rgba(231, 29, 54, 100)
+$color5: #ff9f1c; //rgba(255, 159, 28, 100)
 
 .rainbow {
   background-image: -webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );

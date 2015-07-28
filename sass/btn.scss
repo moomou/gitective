@@ -82,6 +82,11 @@
   padding: 10px;
 }
 
+.center-btn-container {
+  display: flex;
+  justify-content: center;
+}
+
 @keyframes moveUp {
   0% {
     transform: translateY(50%);

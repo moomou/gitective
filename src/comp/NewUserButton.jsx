@@ -27,7 +27,7 @@ const NewUserButton = React.createClass({
     };
   },
   render() {
-    let msg = this.state.err ? 'Only alphanumeric characters are allowed.' : '';
+    let msg = this.state.err ? 'Only alphanumeric characters are allowed. Must not be empty.' : '';
     return (
       <div style={this.style.container}>
         <div className="inputAddOn" style={this.style.container}>
