@@ -1,2 +1,5 @@
-# starter-web
-Starter kit for anything web/js related
+Gitective
+===
+A personal tracking tool that grades yourself.
+
+Live at [here](https://gitective.github.io/)
