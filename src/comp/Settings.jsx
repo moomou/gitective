@@ -38,6 +38,7 @@ export default React.createClass({
     return {
       changeDayAtHour: 0,
       grading: {},
+      isOnline: true,
       showModal: false
     };
   },
@@ -63,14 +64,19 @@ export default React.createClass({
     data.saveUserConfig(this.props.username, config);
     this._clickOpenToggle();
   },
+  componentWillMount() {
+    data.watchConnection((isOnline) => {
+      this.setState({isOnline});
+    });
+  },
   render() {
     let [displayName] = this.props.username.split(':');
     let formKey = JSON.stringify(this.state.grading);
-
+    let onlineState = 'fb-status ' + (this.state.isOnline ? 'on' : 'off');
     return (
       <div>
         <button onClick={this._clickOpenToggle}
-          className="btn btn-black settings-btn">{displayName}</button>
+          className={'btn btn-black settings-btn ' + onlineState}>{displayName}</button>
         <div ref="modal" style={this.style.modal} hidden={!this.state.showModal}>
           <div style={this.style.form} className="form">
             <h3 style={this.style.firstTitle}>Sunset</h3>

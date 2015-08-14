@@ -1,6 +1,6 @@
-const Firebase = require('firebase');
-const randomColor = require('randomColor');
-const moment = require('moment');
+import Firebase from 'firebase';
+import randomColor from 'randomColor';
+import moment from 'moment';
 
 const firebaseURL = 'https://flickering-fire-2479.firebaseio.com';
 const firebaseRef = new Firebase(firebaseURL);
@@ -16,7 +16,7 @@ const DEFAULT_CONFIG = {
     c: 6
   }
 };
-const TOGGLE_TIME = 5000;
+const TOGGLE_TIME = 2500;
 
 export const USER_PREFIX = '#user:';
 
@@ -58,10 +58,10 @@ function toggleFirebaseConnection(state) {
   }, TOGGLE_TIME);
 }
 
-function watchConnection() {
+export function watchConnection(cb) {
   ConnectionRef.on('value', (snapshot) => {
     CONNECTION_STATE = snapshot.val();
-    toggleFirebaseConnection(CONNECTION_STATE);
+    cb(CONNECTION_STATE);
   });
 }
 
@@ -136,6 +136,14 @@ export function undoEntries(username) {
   });
 }
 
+export function addJournal(username, emotion, oneliner) {
+  let date = moment().subtract(CURRENT_CONFIG.changeDayAtHour, 'hour').format('YYYY-MM-DD');
+  UserRef.child(`${username}/journals/${date}`).transaction(() => ({
+    emotion,
+    oneliner
+  }));
+}
+
 export function watchUserTrack(username, cb) {
   return UserRef.child(`${username}/tracks`).on('value', (snapshot) => {
     return cb(snapshot.val());
@@ -144,6 +152,12 @@ export function watchUserTrack(username, cb) {
 
 export function watchUserEntries(username, cb) {
   return UserRef.child(`${username}/entries`).on('value', (snapshot) => {
+    return cb(snapshot.val());
+  });
+}
+
+export function watchUserJournals(username, cb) {
+  return UserRef.child(`${username}/journals`).on('value', (snapshot) => {
     return cb(snapshot.val());
   });
 }
@@ -170,4 +184,8 @@ export function watchUserConfig(username, cb) {
 
 export function throttleConnection() {
   watchConnection();
+}
+
+export function goOffline() {
+  toggleFirebaseConnection(true /* go offline */);
 }

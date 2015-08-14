@@ -161,7 +161,7 @@ export function visualize(inputData, tracks) {
   svg.call(tip);
 
   rectTxt.filter((d) => d in data)
-    .attr('class', (d) => 'g-' + grade(data[d]))
+    .attr('class', (d) => 'g g-' + grade(data[d]))
     .text((d) => grade(data[d]))
     .on('mouseover', tip.show)
     .on('mouseout', tip.hide);

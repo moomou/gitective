@@ -33,6 +33,9 @@ const anonymousControl = [
   faqContainer
 ];
 
+const SAMPLE_PAGE = 'sample:8EF59115-19E1-5AAA-B07D-3641CD73E0C9';
+let currentUser = null;
+
 function setHiddenState(doms, hiddenState) {
   doms.forEach(d => {
     if (hiddenState) {
@@ -54,6 +57,13 @@ function locationChange() {
     scrollContainer.scrollLeft = getMonthScrollOffset();
 
     let username = location.hash.slice(data.USER_PREFIX.length);
+
+    if (currentUser !== null && currentUser !== username) {
+      window.location.reload();
+    } else {
+      currentUser = username;
+    }
+
     let tracker = React.render(<Tracker username={username}/>, trackControl);
     let undoBtn = React.render(<UndoButton username={username}/>, undoBtnContainer);
     let settings = React.render(<Settings username={username}/>, settingsContainer);
@@ -85,6 +95,11 @@ function locationChange() {
         undoBtn.updateUndo(_und.indexBy(tracks, 'name')[revision.trackName].color);
       });
     });
+
+    // Disconnect from firebase to prevent flooding connection.
+    if (username === SAMPLE_PAGE) {
+      data.goOffline();
+    }
   }
 }
 

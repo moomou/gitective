@@ -82,6 +82,20 @@
   padding: 10px;
 }
 
+.fb-status:before {
+  content: ' ';
+  width: 12px;
+  height: 12px;
+  border-radius: 100%;
+  position: absolute;
+  background: lightgray;
+  right: -25px;
+}
+
+.fb-status.on:before {
+  background: lightgreen;
+}
+
 .center-btn-container {
   display: flex;
   justify-content: center;
